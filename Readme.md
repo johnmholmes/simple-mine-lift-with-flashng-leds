@@ -1,4 +1,4 @@
-#This code is for demonstartion purpose only as used on my layout
+This code is for demonstartion purpose only as used on my layout
 This is a simple sketch that moves a lift up and down a various speeds, it has 4 leds that flash in a sequence to show which way it is going and it is triggered by a switch or a sensor to start the animation.
 
 It is based on a arduino nano which sits on asensor shield
