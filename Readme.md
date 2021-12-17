@@ -57,6 +57,6 @@ This is used to turn off the power to the stepper motor once the move has been c
 
 Void loop()
 
-It waits for the sensor to trigger then goes through each of the steps called in sequence. I use delay in this code as the arduino is only being used to control the lift. I may include sound effects in the near futureand may need to amend the code to use millis().
+It waits for the sensor to trigger then goes through each of the steps called in sequence and only runs 1 time and then waits for the next trigger event. I use delay in this code as the arduino is only being used to control the lift. I may include sound effects in the near futureand may need to amend the code to use millis().
 
 
