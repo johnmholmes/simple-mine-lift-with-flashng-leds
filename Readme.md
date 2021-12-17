@@ -16,13 +16,13 @@ const int stepsPerRevolution = 2048;
 There are 3 speeds that the stepper motor uses int speeda = 3;, int speedb = 5;, int speedc = 13;, Max speed is 15 for the stepper motor i use.
 
 There are 8 different amount of movement the stepper motor uses in this sketch.
-int stepa = -600;
-int stepb = -300;
-int stepc = -7800;
-int stepd = -250;
-int stepe = 600;
-int stepf = 300;
-int stepg = 7800;
+int stepa = -600;, 
+int stepb = -300;, 
+int stepc = -7800;, 
+int stepd = -250;, 
+int stepe = 600;, 
+int stepf = 300;, 
+int stepg = 7800;, 
 int steph = 250;
 
 The important thing to watch for is the pins that connect the motor driver to the arduino
