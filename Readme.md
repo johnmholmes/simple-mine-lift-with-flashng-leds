@@ -43,4 +43,20 @@ The important thing to watch for is the pins that connect the motor driver to th
 
 Stepper myStepper = Stepper(stepsPerRevolution, 8, 10, 9, 11);
 
+Pin 1 on the drive board goes to pin 8 on the arduino 
+
+Pin 2 on the drive board goes to pin 10 on the arduino 
+
+Pin 3 on the drive board goes to pin 9 on the arduino 
+
+Pin 4 on the drive board goes to pin 11 on the arduino 
+
+Void STEPPER_OFF()
+
+This is used to turn off the power to the stepper motor once the move has been completed
+
+Void loop()
+
+It waits for the sensor to trigger then goes through each of the steps called in sequence. I use delay in this code as the arduino is only being used to control the lift. I may include sound effects in the near futureand may need to amend the code to use millis().
+
 
