@@ -8,7 +8,25 @@ The trigger sensor is on pin  A5 and returns to a GND pin
 The four leds are connected to pins
 led 1 pin A1, led 2 pin A2, led 3 pin A4, led 4 pin A3 and return to a GND pin each led has a builtin 220ohm resistor in my case.
 
+The motor i use requires 2048 steps to make 1 revolution.
+
+const int stepsPerRevolution = 2048;
+
 
 There are 3 speeds that the stepper motor uses int speeda = 3;, int speedb = 5;, int speedc = 13;, Max speed is 15 for the stepper motor i use.
+
+There are 8 different amount of movement the stepper motor uses in this sketch.
+int stepa = -600;
+int stepb = -300;
+int stepc = -7800;
+int stepd = -250;
+int stepe = 600;
+int stepf = 300;
+int stepg = 7800;
+int steph = 250;
+
+The important thing to watch for is the pins that connect the motor driver to the arduino
+
+Stepper myStepper = Stepper(stepsPerRevolution, 8, 10, 9, 11);
 
 
