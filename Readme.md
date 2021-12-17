@@ -53,7 +53,7 @@ Pin 4 on the drive board goes to pin 11 on the arduino
 
 Void STEPPER_OFF()
 
-This is used to turn off the power to the stepper motor once the move has been completed
+This is used to turn off the power to the stepper motor once the move has been completed> This stops the stepper motorgetting hot while it waits for next move trigger event.
 
 Void loop()
 
