@@ -2,19 +2,19 @@
 
 const int stepsPerRevolution = 2048;
 
-#define SENSOR1_PIN          A5         // push button
-#define LED_PIN1             A1
-#define LED_PIN2             A2
-#define LED_PIN3             A4
-#define LED_PIN4             A3
-#define LIGHT_DELAY          1500
-#define FLASH_DELAY          1000
-#define LIFT_DELAY           60000
+#define SENSOR1_PIN          A5         // push button on pin A5
+#define LED_PIN1             A1         // Led on pin A1 resistor 220ohms used for each led
+#define LED_PIN2             A2         // Led on pin A2 
+#define LED_PIN3             A4         // Led on pin A3
+#define LED_PIN4             A3         // Led on pin A4
+#define LIGHT_DELAY          1500       // This has a value of 1.5 second delay
+#define FLASH_DELAY          1000       // This has a value of 1 second delay  
+#define LIFT_DELAY           60000      // This has a value of 1 minute delay
 
-int speeda = 3;
+int speeda = 3;                         // The speed range for this stepper motor is between 1 and 13 I have found
 int speedb = 5;
 int speedc = 13;
-int stepa = -600;
+int stepa = -600;                       // The number of steps I need the stepper motor to run there are 4 speeds use in each movement
 int stepb = -300;
 int stepc = -7800;
 int stepd = -250;
@@ -24,32 +24,34 @@ int stepg = 7800;
 int steph = 250;
 
 
-Stepper myStepper = Stepper(stepsPerRevolution, 8, 10, 9, 11);
+Stepper myStepper = Stepper(stepsPerRevolution, 8, 10, 9, 11);   // steps for full rev 2048 and the pin sequence is 8 10 9 11
 
 void setup() {
-  pinMode(SENSOR1_PIN, INPUT_PULLUP);
-  pinMode(LED_PIN1, OUTPUT);
+  pinMode(SENSOR1_PIN, INPUT_PULLUP);     // Setup the sensor pin as an input and uses the pull up resistor to hold the pin high
+  pinMode(LED_PIN1, OUTPUT);              // All the leds get setup as outputs
   pinMode(LED_PIN2, OUTPUT);
   pinMode(LED_PIN3, OUTPUT);
   pinMode(LED_PIN4, OUTPUT);
 }
+// There a 8 functions iI use to control the lift movements and LED flashing I can use delay here in this code as the is no interupts
+// Which would have nedd me to use the Millis function in stead making it more complicated.
 
 void LIGHTS_ON() {
-  digitalWrite(LED_PIN1, HIGH);
+  digitalWrite(LED_PIN1, HIGH);          // This function turns all the LEDs on when it is called
   digitalWrite(LED_PIN2, HIGH);
   digitalWrite(LED_PIN3, HIGH);
   digitalWrite(LED_PIN4, HIGH);
 }
 
 void LIGHTS_OFF() {
-  digitalWrite(LED_PIN1, LOW);
+  digitalWrite(LED_PIN1, LOW);           // This function turns all the LEDS off when it is called
   digitalWrite(LED_PIN2, LOW);
   digitalWrite(LED_PIN3, LOW);
   digitalWrite(LED_PIN4, LOW);
 }
 
 void FLASH() {
-  digitalWrite(LED_PIN1, HIGH);
+  digitalWrite(LED_PIN1, HIGH);          // This function is used to flash all 4 LEDS on and off with a 1 second delay
   digitalWrite(LED_PIN2, HIGH);
   digitalWrite(LED_PIN3, HIGH);
   digitalWrite(LED_PIN4, HIGH);
@@ -62,7 +64,7 @@ void FLASH() {
   
 }
 void DOWN_FLASH(){
-  digitalWrite(LED_PIN2, HIGH);
+  digitalWrite(LED_PIN2, HIGH);          // This function sets the LEDS to flash in a sequence starting from the top
   delay(500);
   digitalWrite(LED_PIN2, LOW);
   digitalWrite(LED_PIN3, HIGH);
@@ -91,7 +93,7 @@ void DOWN_FLASH(){
 }
 
 void UP_FLASH(){
-  digitalWrite(LED_PIN4, HIGH);
+  digitalWrite(LED_PIN4, HIGH);        // This function start the LEDS to flash in a sequence from the bottom up
   delay(500);
   digitalWrite(LED_PIN4, LOW);
   digitalWrite(LED_PIN1, HIGH);
@@ -121,28 +123,28 @@ void UP_FLASH(){
 
 
 void STEPPER_OFF(){
-  digitalWrite(8, LOW);
+  digitalWrite(8, LOW);                         // This function turns off the stepper motors when not in motion
   digitalWrite(9, LOW);
   digitalWrite(10, LOW);
   digitalWrite(11, LOW);
 }
 
 void LIFT_DOWN() {
-  myStepper.setSpeed(speeda);//max 15 takes about 33 seconds to lower
-  myStepper.step(stepe);
-  myStepper.setSpeed(speedb);//max 15
+  myStepper.setSpeed(speeda);                   // This function send the lift downwards for the retun starting slowly
+  myStepper.step(stepe);                        // Moves so many steps befor speeding up                    
+  myStepper.setSpeed(speedb);
   myStepper.step(steph);
-  myStepper.setSpeed(speedc);//max 15
+  myStepper.setSpeed(speedc);                   // Lift at its fasted speed
   myStepper.step(stepg);
-  myStepper.setSpeed(speedb);//max 15
+  myStepper.setSpeed(speedb);                   // Lift starts to slow down
   myStepper.step(stepf);
-  myStepper.setSpeed(speeda);//max 15
-  myStepper.step(stepe);
+  myStepper.setSpeed(speeda);
+  myStepper.step(stepe);                        // Lift reaches the bottom and stops
   delay(1000); 
 }
 
 void LIFT_UP() {
-  myStepper.setSpeed(speeda);//max 15 takes about 33 seconds to raise
+  myStepper.setSpeed(speeda);                   // This is the reverse of the downward travel so not explained
   myStepper.step(stepa);
   myStepper.setSpeed(speedb);//max 15
   myStepper.step(stepb);
@@ -154,10 +156,11 @@ void LIFT_UP() {
   myStepper.step(stepa);
   delay(1000);
 }
-
+// start of the void loop which will run for ever while the Arduino has power its just a case of one fuction call after another 
+// With a delay in between each function call
 void loop() {
-  if(digitalRead(SENSOR1_PIN) == LOW){
-    LIGHTS_ON();
+  if(digitalRead(SENSOR1_PIN) == LOW){          // Waiting for the sensor or button to be activated
+    LIGHTS_ON();                                // Calls the relvent function and once that function is complete it will move to the next line 
     delay(500);
     LIGHTS_OFF();
     delay(500);
