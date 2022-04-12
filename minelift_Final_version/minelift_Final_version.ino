@@ -7,6 +7,7 @@ const int stepsPerRevolution = 2048;
 #define LED_PIN2             A2         // Led on pin A2 
 #define LED_PIN3             A4         // Led on pin A3
 #define LED_PIN4             A3         // Led on pin A4
+#define BLINK_DELAY          500        // Short blink
 #define LIGHT_DELAY          1500       // This has a value of 1.5 second delay
 #define FLASH_DELAY          1000       // This has a value of 1 second delay  
 #define LIFT_DELAY           60000      // This has a value of 1 minute delay
@@ -58,73 +59,73 @@ void FLASH() {
   digitalWrite(LED_PIN2, HIGH);
   digitalWrite(LED_PIN3, HIGH);
   digitalWrite(LED_PIN4, HIGH);
-  delay(1000);
+  delay(FLASH_DELAY);
   digitalWrite(LED_PIN1, LOW);
   digitalWrite(LED_PIN2, LOW);
   digitalWrite(LED_PIN3, LOW);
   digitalWrite(LED_PIN4, LOW);
-  delay(1000);
+  delay(FLASH_DELAY);
   
 }
 
 // This function sets the LEDS to flash in a sequence starting from the top
 void DOWN_FLASH(){
   digitalWrite(LED_PIN2, HIGH);         // Top Led in my case  
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN2, LOW);
   digitalWrite(LED_PIN3, HIGH);         // 2nd LED from the top
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN3, LOW);
   digitalWrite(LED_PIN1, HIGH);         // 3rd LED from the top
-  delay(500);
+  delay(BLINK_DELAY;
   digitalWrite(LED_PIN1, LOW);
   digitalWrite(LED_PIN4, HIGH);         // Bottom Led in my case
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN4, LOW);
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN2, HIGH);
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN2, LOW);
   digitalWrite(LED_PIN3, HIGH);
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN3, LOW);
   digitalWrite(LED_PIN1, HIGH);
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN1, LOW);
   digitalWrite(LED_PIN4, HIGH);
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN4, LOW);
-  delay(1000);
+  delay(FLASH_DELAY);
 }
 
 // This function start the LEDS to flash in a sequence from the bottom up
 void UP_FLASH(){
   digitalWrite(LED_PIN4, HIGH);       
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN4, LOW);
   digitalWrite(LED_PIN1, HIGH);
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN1, LOW);
   digitalWrite(LED_PIN3, HIGH);
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN3, LOW);
   digitalWrite(LED_PIN2, HIGH);
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN2, LOW);
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN4, HIGH);
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN4, LOW);
   digitalWrite(LED_PIN1, HIGH);
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN1, LOW);
   digitalWrite(LED_PIN3, HIGH);
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN3, LOW);
   digitalWrite(LED_PIN2, HIGH);
-  delay(500);
+  delay(BLINK_DELAY);
   digitalWrite(LED_PIN2, LOW);
-  delay(1000);
+  delay(FLASH_DELAY);
 }
 
 // This function turns off the stepper motors when not in motion
@@ -148,7 +149,7 @@ void LIFT_DOWN() {
   myStepper.step(stepf);
   myStepper.setSpeed(speeda);
   myStepper.step(stepe);                        // Lift reaches the bottom and stops
-  delay(1000); 
+  delay(FLASH_DELAY); 
 }
 
 // This is the reverse of the downward travel so not explained
@@ -163,22 +164,22 @@ void LIFT_UP() {
   myStepper.step(stepd);
   myStepper.setSpeed(speeda);//max 15
   myStepper.step(stepa);
-  delay(1000);
+  delay(FLASH_DELAY);
 }
 // start of the void loop which will run for ever while the Arduino has power its just a case of one fuction call after another 
 // With a delay in between each function call
 void loop() {
   if(digitalRead(SENSOR1_PIN) == LOW){          // Waiting for the sensor or button to be activated
     LIGHTS_ON();                                // Calls the relvent function and once that function is complete it will move to the next line 
-    delay(500);
+    delay(BLINK_DELAY);
     LIGHTS_OFF();
-    delay(500);
+    delay(BLINK_DELAY);
     LIGHTS_ON();
-    delay(1000);
+    delay(FLASH_DELAY);
     LIGHTS_OFF();
-    delay(1000);
+    delay(FLASH_DELAY);
     UP_FLASH();
-    delay(500);
+    delay(BLINK_DELAY);
     LIGHTS_ON();
     delay(LIGHT_DELAY);
     LIFT_UP();
@@ -190,15 +191,15 @@ void loop() {
   // Lift delayed at the top for 60 seconds before going back down
     
     LIGHTS_ON();
-    delay(500);
+    delayBLINK_DELAY);
     LIGHTS_OFF();
-    delay(500);
+    delay(BLINK_DELAY);
     LIGHTS_ON();
-    delay(1000);
+    delay(FLASH_DELAY);
     LIGHTS_OFF();
-    delay(1000);
+    delay(FLASH_DELAY);
     DOWN_FLASH();
-    delay(1000);
+    delay(FLASH_DELAY);
     LIGHTS_ON();
     delay(LIGHT_DELAY);
     LIFT_DOWN();
