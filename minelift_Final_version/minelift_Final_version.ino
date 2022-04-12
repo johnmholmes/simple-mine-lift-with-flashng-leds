@@ -36,22 +36,25 @@ void setup() {
 // There a 8 functions iI use to control the lift movements and LED flashing I can use delay here in this code as the is no interupts
 // Which would have nedd me to use the Millis function in stead making it more complicated.
 
+// This function turns all the LEDs on when it is called
 void LIGHTS_ON() {
-  digitalWrite(LED_PIN1, HIGH);          // This function turns all the LEDs on when it is called
+  digitalWrite(LED_PIN1, HIGH);          
   digitalWrite(LED_PIN2, HIGH);
   digitalWrite(LED_PIN3, HIGH);
   digitalWrite(LED_PIN4, HIGH);
 }
 
+// This function turns all the LEDS off when it is called
 void LIGHTS_OFF() {
-  digitalWrite(LED_PIN1, LOW);           // This function turns all the LEDS off when it is called
+  digitalWrite(LED_PIN1, LOW);           
   digitalWrite(LED_PIN2, LOW);
   digitalWrite(LED_PIN3, LOW);
   digitalWrite(LED_PIN4, LOW);
 }
 
+// This function is used to flash all 4 LEDS on and off with a 1 second delay
 void FLASH() {
-  digitalWrite(LED_PIN1, HIGH);          // This function is used to flash all 4 LEDS on and off with a 1 second delay
+  digitalWrite(LED_PIN1, HIGH);          
   digitalWrite(LED_PIN2, HIGH);
   digitalWrite(LED_PIN3, HIGH);
   digitalWrite(LED_PIN4, HIGH);
@@ -63,17 +66,19 @@ void FLASH() {
   delay(1000);
   
 }
+
+// This function sets the LEDS to flash in a sequence starting from the top
 void DOWN_FLASH(){
-  digitalWrite(LED_PIN2, HIGH);          // This function sets the LEDS to flash in a sequence starting from the top
+  digitalWrite(LED_PIN2, HIGH);         // Top Led in my case  
   delay(500);
   digitalWrite(LED_PIN2, LOW);
-  digitalWrite(LED_PIN3, HIGH);
+  digitalWrite(LED_PIN3, HIGH);         // 2nd LED from the top
   delay(500);
   digitalWrite(LED_PIN3, LOW);
-  digitalWrite(LED_PIN1, HIGH);
+  digitalWrite(LED_PIN1, HIGH);         // 3rd LED from the top
   delay(500);
   digitalWrite(LED_PIN1, LOW);
-  digitalWrite(LED_PIN4, HIGH);
+  digitalWrite(LED_PIN4, HIGH);         // Bottom Led in my case
   delay(500);
   digitalWrite(LED_PIN4, LOW);
   delay(500);
@@ -92,8 +97,9 @@ void DOWN_FLASH(){
   delay(1000);
 }
 
+// This function start the LEDS to flash in a sequence from the bottom up
 void UP_FLASH(){
-  digitalWrite(LED_PIN4, HIGH);        // This function start the LEDS to flash in a sequence from the bottom up
+  digitalWrite(LED_PIN4, HIGH);       
   delay(500);
   digitalWrite(LED_PIN4, LOW);
   digitalWrite(LED_PIN1, HIGH);
@@ -121,17 +127,19 @@ void UP_FLASH(){
   delay(1000);
 }
 
-
+// This function turns off the stepper motors when not in motion
 void STEPPER_OFF(){
-  digitalWrite(8, LOW);                         // This function turns off the stepper motors when not in motion
+  digitalWrite(8, LOW);                         
   digitalWrite(9, LOW);
   digitalWrite(10, LOW);
   digitalWrite(11, LOW);
 }
 
+// This function send the lift downwards for the retun starting slowly
+// Moves so many steps befor speeding up 
 void LIFT_DOWN() {
-  myStepper.setSpeed(speeda);                   // This function send the lift downwards for the retun starting slowly
-  myStepper.step(stepe);                        // Moves so many steps befor speeding up                    
+  myStepper.setSpeed(speeda);                   
+  myStepper.step(stepe);                                           
   myStepper.setSpeed(speedb);
   myStepper.step(steph);
   myStepper.setSpeed(speedc);                   // Lift at its fasted speed
@@ -143,8 +151,9 @@ void LIFT_DOWN() {
   delay(1000); 
 }
 
+// This is the reverse of the downward travel so not explained
 void LIFT_UP() {
-  myStepper.setSpeed(speeda);                   // This is the reverse of the downward travel so not explained
+  myStepper.setSpeed(speeda);                  
   myStepper.step(stepa);
   myStepper.setSpeed(speedb);//max 15
   myStepper.step(stepb);
@@ -177,6 +186,8 @@ void loop() {
     STEPPER_OFF();
     LIGHTS_OFF();
     delay(LIFT_DELAY);
+    
+  // Lift delayed at the top for 60 seconds before going back down
     
     LIGHTS_ON();
     delay(500);
