@@ -1,4 +1,4 @@
-#include <Stepper.h>
+#include <Stepper.h>                   //Include the stepper motor library we have to use the 3 functions it has to control the motor
 
 const int stepsPerRevolution = 2048;
 
